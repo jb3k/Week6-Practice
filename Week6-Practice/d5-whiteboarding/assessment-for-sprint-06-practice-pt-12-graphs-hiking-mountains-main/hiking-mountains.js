@@ -22,14 +22,14 @@ function findStarts(matrix) {
     }
 
     // Bottom Row
-    for (let i = 0; i < matrix[matrix.length-1].length; i++) {
-        if (matrix[matrix.length-1][i] == 0) {
-            starts.push([matrix.length-1, i])
+    for (let i = 0; i < matrix[matrix.length - 1].length; i++) {
+        if (matrix[matrix.length - 1][i] == 0) {
+            starts.push([matrix.length - 1, i])
         }
     }
 
     // Left except first and last
-    for (let i = 1; i < matrix.length-1; i++) {
+    for (let i = 1; i < matrix.length - 1; i++) {
         if (matrix[i][0] == 0) {
             starts.push([i, 0])
         }
@@ -38,7 +38,7 @@ function findStarts(matrix) {
     // Right except first and last
     for (let i = 1; i < matrix.length - 1; i++) {
         if (matrix[i][matrix[0].length - 1] == 0) {
-            starts.push([i, matrix[0].length-1])
+            starts.push([i, matrix[0].length - 1])
         }
     }
 
@@ -47,20 +47,69 @@ function findStarts(matrix) {
 
 function findNeighbors(node, matrix) {
     // Don't forget to include diagonal neighbors!!!
-
+    //let node = coordinates...
     // Your code here
+
+
 }
 
 function pathTraversal(node, matrix, visited, peak) {
     // Your code here
+
+    let queue = [[node]]
+    visited.add(node.toString())
+
+    while (queue.length) {
+        let currNode = queue.pop()
+        //do the thing..
+        let lastNode = currNode[currNode.length - 1]
+        [row, col] = node
+
+        if (matrix[row][col] === peak) return currNode
+
+        let neighborsArr = findNeighbors(lastNode, matrix)
+        for (let neighbors of neighborsArr) {
+            if (!visited.has(neighbors.toString())) {
+                queue.push([...currNode, neighbors]);
+                visited.add(neighbors.toString())
+            }
+        }
+
+    }
+    return false
 }
 
 function identifyPath(mountain) {
+    //find the node
+    [row, col] = mountain
+    let node = [row, col]
     // Find the peak
+    let peak = pathTraversal(node, mountain, visited, target)
     // Find the start
+    let startNode = findStarts(mountain)
 
     // Traverse from the starts and try to get to the top
     // Your code here
+
+    let queue = [startNode]
+    let visited = new Set();
+    visited.add(node.toString())
+
+    while (queue.length) {
+        let currNode = queue.pop()
+        //do the thing..
+        // if (currNode === peak){return path...?}
+
+        let neighborsArr = findNeighbors(node, matrix)
+        for (let neighbors of neighborsArr) {
+            if (!visited.has(neighbors.toString())) {
+                queue.push(neighbors.toString());
+                visited.add(neighbors)
+            }
+        }
+
+    }
+
 }
 
 // Uncomment for local testing

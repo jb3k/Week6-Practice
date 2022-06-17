@@ -26,6 +26,8 @@ class TreeNode {
 //main problems here are finding each level, 
 //then making sure you arent saving the max value;
 
+//helper to the children at each level  
+
 function findMaxEachLevel(root) {
   // Your code here
 
@@ -35,24 +37,19 @@ function findMaxEachLevel(root) {
   let arr = []
 
   while (queue.length) {
-    for (let i = 0; i < queue.length; i++) {
+    let level = queue.length
+    let levelArr = []
+
+    for (let i = 0; i < level; i++) {
       let shifted = queue.shift();
+      levelArr.push(shifted.value)
 
       if (shifted.left) { queue.push(shifted.left) }
       if (shifted.right) { queue.push(shifted.right) }
-
     }
 
-    if (queue.length > 1) {
-      let max = queue.reduce(function (acc, ele) {
-        if (acc > ele) return acc
-        return ele
-      })
-      arr.push(max)
-    } else {
-      arr.push(queue)
-    }
-
+    let max = Math.max(...levelArr)
+    arr.push(max)
   }
 
   return arr
