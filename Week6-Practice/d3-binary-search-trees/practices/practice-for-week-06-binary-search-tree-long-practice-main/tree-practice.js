@@ -24,6 +24,8 @@ function findMaxBST(rootNode) {
 
 function findMinBT(rootNode) {
   // Your code here
+
+  
 }
 
 function findMaxBT(rootNode) {
