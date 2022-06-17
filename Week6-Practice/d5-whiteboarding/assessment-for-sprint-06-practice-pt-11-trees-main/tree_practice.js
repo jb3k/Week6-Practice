@@ -23,21 +23,53 @@ class TreeNode {
 
 // Expected Output -> [ 5, 7, 3, 9, 4 ]
 
+//main problems here are finding each level, 
+//then making sure you arent saving the max value;
+
 function findMaxEachLevel(root) {
   // Your code here
+
+  if (!root) return null;
+
+  let queue = [root];
+  let arr = []
+
+  while (queue.length) {
+    for (let i = 0; i < queue.length; i++) {
+      let shifted = queue.shift();
+
+      if (shifted.left) { queue.push(shifted.left) }
+      if (shifted.right) { queue.push(shifted.right) }
+
+    }
+
+    if (queue.length > 1) {
+      let max = queue.reduce(function (acc, ele) {
+        if (acc > ele) return acc
+        return ele
+      })
+      arr.push(max)
+    } else {
+      arr.push(queue)
+    }
+
+  }
+
+  return arr
+
 }
 
 // Uncomment the code below for local testing.
 
 // // Build a tree for testing
 
-//   const simpleTree = new TreeNode(4, null, null);
-//   simpleTree.right = new TreeNode(1, null, null);
-//   simpleTree.left = new TreeNode(3, null, null);
-//   simpleTree.right.right = new TreeNode(2, null, null);
+const simpleTree = new TreeNode(4, null, null);
+simpleTree.right = new TreeNode(1, null, null);
+simpleTree.left = new TreeNode(3, null, null);
+simpleTree.right.right = new TreeNode(2, null, null);
 
-// // Test the function with the debug tree
-// console.log(findMaxEachLevel(simpleTree)); // -> [ 4, 3, 2 ]
+// Test the function with the debug tree
+console.log(findMaxEachLevel(simpleTree)); // -> [ 4, 3, 2 ]
 
 /*******************************************************************************
  * Do not change the code after this line.
