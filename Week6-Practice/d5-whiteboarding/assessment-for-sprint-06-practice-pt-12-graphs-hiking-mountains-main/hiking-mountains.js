@@ -47,68 +47,77 @@ function findStarts(matrix) {
 
 function findNeighbors(node, matrix) {
     // Don't forget to include diagonal neighbors!!!
-    //let node = coordinates...
     // Your code here
 
+    let neigborsArr = []
+
+    for (let r = -1; r <= 1; r++) {
+        for (let c = -1; c <= 1; c++) {
+            if (r === 0 && c === 0) continue;
+
+            let row = node[0];
+            let col = node[1]
+            const currRow = row + r;
+            const currCol = col + c;
+
+            if (currRow < 0 || currRow >= matrix.length) continue;
+            else if (currCol < 0 || currCol >= matrix[currRow].length) continue;
+            else {
+                let currHeight = matrix[currRow][currCol]
+                if (Math.abs(matrix[row][col] - currHeight) <= 1) {
+                    neigborsArr.push([currRow, currCol])
+                }
+            }
+        }
+    }
+    return neigborsArr
 
 }
 
 function pathTraversal(node, matrix, visited, peak) {
     // Your code here
 
-    let queue = [[node]]
-    visited.add(node.toString())
+    //how do i know if i want to do a bfs or dfs?
+    let stack = [node];
+    visited.add(node.toString());
 
-    while (queue.length) {
-        let currNode = queue.pop()
-        //do the thing..
-        let lastNode = currNode[currNode.length - 1]
-        [row, col] = node
+    while (stack.length) {
+        let currNode = stack.pop();
+        // const [currRow, currCol] = currNode
 
-        if (matrix[row][col] === peak) return currNode
+        let currRow = currNode[0];
+        let currCol = currNode[1];
 
-        let neighborsArr = findNeighbors(lastNode, matrix)
-        for (let neighbors of neighborsArr) {
-            if (!visited.has(neighbors.toString())) {
-                queue.push([...currNode, neighbors]);
-                visited.add(neighbors.toString())
+        if (matrix[currRow][currCol] === peak) return true
+
+        //make sure when you call findNeighbors you use currNode not Node
+        let neigborsArr = findNeighbors(currNode, matrix);
+
+        //understand the why and how this breaks down...
+        for (let neighbors of neigborsArr) {
+            let neighborsStr = neighbors.toString();
+            if (!visited.has(neighborsStr)) {
+                visited.add(neighborsStr);
+                stack.push(neighbors)
             }
         }
-
     }
+
     return false
+
+
 }
 
 function identifyPath(mountain) {
-    //find the node
-    [row, col] = mountain
-    let node = [row, col]
-    // Find the peak
-    let peak = pathTraversal(node, mountain, visited, target)
-    // Find the start
-    let startNode = findStarts(mountain)
 
-    // Traverse from the starts and try to get to the top
-    // Your code here
+    let peak = findPeak(mountain)
+    let starts = findStarts(mountain)
 
-    let queue = [startNode]
-    let visited = new Set();
-    visited.add(node.toString())
+    //return which starting point makes has the correct path
+    let visited = new Set()
+    
+    if (pathTraversal(starts, mountain, visited, peak)) return starts
 
-    while (queue.length) {
-        let currNode = queue.pop()
-        //do the thing..
-        // if (currNode === peak){return path...?}
-
-        let neighborsArr = findNeighbors(node, matrix)
-        for (let neighbors of neighborsArr) {
-            if (!visited.has(neighbors.toString())) {
-                queue.push(neighbors.toString());
-                visited.add(neighbors)
-            }
-        }
-
-    }
 
 }
 

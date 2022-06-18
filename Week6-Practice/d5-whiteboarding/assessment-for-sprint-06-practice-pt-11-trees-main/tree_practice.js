@@ -31,28 +31,6 @@ class TreeNode {
 function findMaxEachLevel(root) {
   // Your code here
 
-  if (!root) return null;
-
-  let queue = [root];
-  let arr = []
-
-  while (queue.length) {
-    let level = queue.length
-    let levelArr = []
-
-    for (let i = 0; i < level; i++) {
-      let shifted = queue.shift();
-      levelArr.push(shifted.value)
-
-      if (shifted.left) { queue.push(shifted.left) }
-      if (shifted.right) { queue.push(shifted.right) }
-    }
-
-    let max = Math.max(...levelArr)
-    arr.push(max)
-  }
-
-  return arr
 
 }
 
