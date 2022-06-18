@@ -117,8 +117,8 @@ function identifyPath(mountain) {
     let visited = new Set()
 
     for (let start of starts) {
-
-        if (pathTraversal(starts, mountain, visited, peak)) return start
+        console.log(start)
+        if (pathTraversal(start, mountain, visited, peak)) return start
 
     }
 
@@ -138,16 +138,16 @@ function identifyPath(mountain) {
 // console.log(findNeighbors([2,0], mountain_0)) // <- Expect '[ [ 1, 0 ], [ 1, 1 ] ]'
 
 // // Example 1
-// const mountain_1 = [
-//         [1, 0, 1, 1],
-//         [2, 3, 2, 1],
-//         [0, 2, 4, 1],
-//         [3, 2, 3, 1]
-// ];
+const mountain_1 = [
+        [1, 0, 1, 1],
+        [2, 3, 2, 1],
+        [0, 2, 4, 1],
+        [3, 2, 3, 1]
+];
 
-// test_visited = new Set()
-// console.log(pathTraversal([0, 1], mountain_1, test_visited, 4)) // <- Expect 'true
-// console.log(identifyPath(mountain_1)) // <- Expect '[ 0, 1 ]'
+test_visited = new Set()
+console.log(pathTraversal([0, 1], mountain_1, test_visited, 4)) // <- Expect 'true
+console.log(identifyPath(mountain_1)) // <- Expect '[ 0, 1 ]'
 
 // // Example 2
 // const mountain_2 = [
