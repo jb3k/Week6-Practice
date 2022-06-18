@@ -115,9 +115,14 @@ function identifyPath(mountain) {
 
     //return which starting point makes has the correct path
     let visited = new Set()
-    
-    if (pathTraversal(starts, mountain, visited, peak)) return starts
 
+    for (let start of starts) {
+
+        if (pathTraversal(starts, mountain, visited, peak)) return start
+
+    }
+
+    return false
 
 }
 
