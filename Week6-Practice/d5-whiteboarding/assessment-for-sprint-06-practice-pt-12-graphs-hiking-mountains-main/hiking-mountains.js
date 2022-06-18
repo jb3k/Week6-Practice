@@ -110,19 +110,12 @@ function pathTraversal(node, matrix, visited, peak) {
 
 function identifyPath(mountain) {
 
-    let peak = findPeak(mountain)
-    let starts = findStarts(mountain)
+    // Find the peak
+    // Find the start
 
-    //return which starting point makes has the correct path
-    let visited = new Set()
+    // Traverse from the starts and try to get to the top
+    // for loop for the find starts
 
-    for (let start of starts) {
-        console.log(start)
-        if (pathTraversal(start, mountain, visited, peak)) return start
-
-    }
-
-    return false
 
 }
 
@@ -139,10 +132,10 @@ function identifyPath(mountain) {
 
 // // Example 1
 const mountain_1 = [
-        [1, 0, 1, 1],
-        [2, 3, 2, 1],
-        [0, 2, 4, 1],
-        [3, 2, 3, 1]
+    [1, 0, 1, 1],
+    [2, 3, 2, 1],
+    [0, 2, 4, 1],
+    [3, 2, 3, 1]
 ];
 
 test_visited = new Set()
