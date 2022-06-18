@@ -40,12 +40,10 @@ function countIslands(matrix) {
 
         //why does this visited.add need to be inside the if statement?
         visited.add(node)
-        //why does this need to be in a nested array?
         let stack = [[row, col]]
 
         while (stack.length) {
           let currNode = stack.pop();
-
 
           let currRow = currNode[0];
           let currCol = currNode[1];
@@ -62,8 +60,6 @@ function countIslands(matrix) {
       }
     }
   }
-
-
   return count
 
 }
