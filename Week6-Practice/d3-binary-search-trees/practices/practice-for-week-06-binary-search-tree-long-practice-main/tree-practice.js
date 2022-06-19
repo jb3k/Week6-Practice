@@ -25,23 +25,88 @@ function findMaxBST(rootNode) {
 function findMinBT(rootNode) {
   // Your code here
 
-  
+  if (!rootNode) return;
+
+  let queue = [rootNode];
+  let min = Infinity
+
+  while (queue.length) {
+    let currNode = queue.shift();
+    //do the thing...
+    if (currNode.val < min) min = currNode.val
+    if (currNode.left) queue.push(currNode.left);
+    if (currNode.right) queue.push(currNode.right)
+
+  }
+  return min
+
 }
 
 function findMaxBT(rootNode) {
   // Your code here
+  if (!rootNode) return;
+
+  let queue = [rootNode];
+  let max = -Infinity
+
+  while (queue.length) {
+    let currNode = queue.shift();
+    //do the thing...
+    if (currNode.val > max) max = currNode.val
+    if (currNode.left) queue.push(currNode.left);
+    if (currNode.right) queue.push(currNode.right)
+  }
+  return max
 }
 
 function getHeight(rootNode) {
   // Your code here
+
+  if (!rootNode) return;
+
+  let queue = [rootNode];
+  let count = 0;
+
+  while (queue.length) {
+    let level = queue.length;
+    count++
+    for (let i = 0; i < level; i++) {
+      let currNode = queue.shift();
+
+      if (currNode.left) queue.push(currNode.left);
+      if (currNode.right) queue.push(currNode.right);
+    }
+  }
+  return count - 1
+
+
 }
 
 function countNodes(rootNode) {
   // Your code here
+  if (!rootNode) return;
+
+  let queue = [rootNode];
+  let count = 0;
+
+  while (queue.length) {
+    let level = queue.length;
+    for (let i = 0; i < level; i++) {
+      let currNode = queue.shift();
+      count++
+
+      if (currNode.left) queue.push(currNode.left);
+      if (currNode.right) queue.push(currNode.right);
+    }
+  }
+  return count
 }
 
 function balancedTree(rootNode) {
   // Your code here
+  if (!rootNode) return false
+  return countNodes(rootNode.left) === countNodes(rootNode.right)
+
 }
 
 function getParentNode(rootNode, target) {
