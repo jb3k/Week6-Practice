@@ -83,10 +83,10 @@ function pathTraversal(node, matrix, visited, peak) {
 
     while (stack.length) {
         let currNode = stack.pop();
-        // const [currRow, currCol] = currNode
+        let [currRow, currCol] = currNode
 
-        let currRow = currNode[0];
-        let currCol = currNode[1];
+        // let currRow = currNode[0];
+        // let currCol = currNode[1];
 
         if (matrix[currRow][currCol] === peak) return true
 
@@ -114,16 +114,20 @@ function identifyPath(mountain) {
     let peak = findPeak(mountain)
     // Find the start
     let starts = findStarts(mountain)
+
     // Traverse from the starts and try to get to the top
     // for loop for the find starts
     let visited = new Set()
     for (let start of starts) {
-        if (pathTraversal(start, mountain, visited, peak)) return start
+        if (pathTraversal(start, mountain, visited, peak)) {
+            return start
+        }
     }
-
     return false
 
 }
+
+
 
 // Uncomment for local testing
 
